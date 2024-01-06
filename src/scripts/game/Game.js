@@ -10,7 +10,26 @@ export class Game extends Scene {
         this.selectedTile   = null;
         this.createBackground();
         this.createBoard();
+
         this.combinationManager = new CombinationManager(this.board);
+        this.removeStartMatches();
+    }
+
+    removeStartMatches() {
+        let matches             = this.combinationManager.getMatches();
+
+        while (matches.length) {
+            console.log(matches);
+            this.removeMatches(matches);
+
+            const fields = this.board.fields.filter(field => field.tile === null);
+
+            fields.forEach(field => {
+                this.board.createTile(field);
+            });
+
+            matches = this.combinationManager.getMatches();
+        }
     }
 
     createBoard() {
@@ -62,9 +81,10 @@ export class Game extends Scene {
             if (matches.length) {
                 this.processMatches(matches);
             }
-            console.log(matches);
+            // console.log(matches);
             // ...
-            this.disabled = false; // lock the board
+
+            // this.disabled = false; // lock the board
         });
 
         // 1. reset fields in moved tiles
@@ -74,9 +94,19 @@ export class Game extends Scene {
 
     processMatches(matches) {
         this.removeMatches(matches);
-        this.processFallDown().then(() => {
-            this.addTiles();
-        });
+        this.processFallDown()
+            .then(() => this.addTiles())
+            .then(() => this.onFallDownOver());
+    }
+
+    onFallDownOver() {
+        const matches = this.combinationManager.getMatches();
+
+        if (matches.length) {
+            this.processMatches(matches)
+        } else {
+            this.disabled = false; // unlock the board
+        }
     }
 
     addTiles() {
