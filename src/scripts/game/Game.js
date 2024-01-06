@@ -1,6 +1,7 @@
 import { App } from "../system/App";
 import { Scene } from "../system/Scene";
 import { Board } from "./Board";
+import { CombinationManager } from "./CombinationManager";
 import { Field } from "./Field";
 
 export class Game extends Scene {
