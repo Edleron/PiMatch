@@ -82,8 +82,8 @@ export class Game extends Scene {
     addTiles() {
         return new Promise(resolve => {
             // 1. fetch all empty fields
-            const fields = this.board.fields.filter(field => field.tile === null);
-            let total = fields.length;
+            const fields  = this.board.fields.filter(field => field.tile === null);
+            let total     = fields.length;
             let completed = 0;
 
             // 2. for each empty field
@@ -109,7 +109,7 @@ export class Game extends Scene {
     processFallDown() {
         return new Promise(resolve => {
             let completed = 0;
-            let started = 0;
+            let started   = 0;
 
             // check all fields of the board starting from the bottom row
             for (let row = this.board.rows - 1; row >= 0; row--) {
@@ -146,7 +146,7 @@ export class Game extends Scene {
                 // the first found tile will be placed in the curr empty field
                 const fallingTile = fallingField.tile;
                 fallingTile.field = emptyField;
-                emptyField.tile = fallingTile;
+                emptyField.tile   = fallingTile;
                 fallingField.tile = null;
 
                 // run the tile move method and stop searching a tile for that empty field
