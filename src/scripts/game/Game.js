@@ -74,6 +74,58 @@ export class Game extends Scene {
 
     processMatches(matches) {
         this.removeMatches(matches);
+        this.processFallDown();
+    }
+
+    processFallDown() {
+        return new Promise(resolve => {
+            let completed = 0;
+            let started = 0;
+
+            // check all fields of the board starting from the bottom row
+            for (let row = this.board.rows - 1; row >= 0; row--) {
+                for (let col = this.board.cols - 1; col >= 0; col--) {
+                    const field = this.board.getField(row, col);
+
+                    // if there is no tile in the field
+                    if (!field.tile) {
+                        ++started;
+
+                        // shift all tiles that are in the same col in all the rows above
+                        this.fallDownTo(field).then(() => {
+                            ++completed;
+
+                            if (completed >= started) {
+                                resolve();
+                            }
+                        });
+                    }
+                }
+            }
+
+
+        });
+    }
+
+    fallDownTo(emptyField) {
+        // check all board fields in the found empty field col but in all higher rows
+        for (let row = emptyField.row - 1; row >= 0; row--) {
+            let fallingField = this.board.getField(row, emptyField.col);
+
+            // find the first field with a tile
+            if (fallingField.tile)  {
+                // the first found tile will be placed in the curr empty field
+                const fallingTile = fallingField.tile;
+                fallingTile.field = emptyField;
+                emptyField.tile = fallingTile;
+                fallingField.tile = null;
+
+                // run the tile move method and stop searching a tile for that empty field
+                return fallingTile.fallDownTo(emptyField.position);
+           }
+        }
+
+        return Promise.resolve();
     }
 
     removeMatches(matches) {
