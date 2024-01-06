@@ -1,6 +1,7 @@
 import { App } from "../system/App";
 import * as PIXI from "pixi.js";
 import { Field } from "./Field";
+import { Tile } from "./Tile";
 
 export class Board {
     constructor() {
@@ -25,6 +26,12 @@ export class Board {
 
     create() {
         this.createFields();
+        this.createTiles();
+    }
+
+    createTiles() {
+        const tile = new Tile("green");
+        this.container.addChild(tile.sprite);
     }
 
     createFields() {
