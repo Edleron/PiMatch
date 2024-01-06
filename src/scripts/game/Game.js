@@ -10,14 +10,16 @@ export class Game extends Scene {
     }
 
     createBoard() {
-        this.board = new Board();
+        this.board      = new Board();
+        
         this.container.addChild(this.board.container);
     }
 
     createBackground() {
-        this.bg = App.sprite("bg");
+        this.bg         = App.sprite("bg");       
+        this.bg.width   = window.innerWidth;
+        this.bg.height  = window.innerHeight;
+
         this.container.addChild(this.bg);
-        this.bg.width = window.innerWidth;
-        this.bg.height = window.innerHeight;
     }
 }

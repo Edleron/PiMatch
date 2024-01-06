@@ -2,12 +2,14 @@ import { App } from "../system/App";
 
 export class Field {
     constructor(row, col) {
-        this.row = row;
-        this.col = col;
+        this.row        = row;
+        this.col        = col;
 
-        this.sprite = App.sprite("field");
-        this.sprite.x = this.position.x;
-        this.sprite.y = this.position.y;
+        this.sprite     = App.sprite("field");
+        this.sprite.x   = this.position.x;
+        this.sprite.y   = this.position.y;
+
+        // Tam Ortaya alma
         this.sprite.anchor.set(0.5);
     }
 

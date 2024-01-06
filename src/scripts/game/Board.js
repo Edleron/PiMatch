@@ -4,23 +4,23 @@ import { Field } from "./Field";
 
 export class Board {
     constructor() {
-        this.container  = new PIXI.Container();
-        this.fields     = [];
-        this.rows       = App.config.board.rows;
-        this.cols       = App.config.board.cols;
+        this.container      = new PIXI.Container();
+        this.fields         = [];
+        this.rows           = App.config.board.rows;
+        this.cols           = App.config.board.cols;
 
         this.create();
         this.ajustPosition();
     }
 
     ajustPosition() {
-        this.fieldSize   = this.fields[0].sprite.width;
-        this.width       = this.cols * this.fieldSize;
-        this.height      = this.rows * this.fieldSize;
+        this.fieldSize      = this.fields[0].sprite.width;
+        this.width          = this.cols * this.fieldSize;
+        this.height         = this.rows * this.fieldSize;
 
         // Tam ortaya alma
-        this.container.x = (window.innerWidth - this.width) / 2 + this.fieldSize / 2;
-        this.container.y = (window.innerHeight - this.height) / 2 + this.fieldSize / 2;
+        this.container.x    = (window.innerWidth - this.width) / 2 + this.fieldSize / 2;
+        this.container.y    = (window.innerHeight - this.height) / 2 + this.fieldSize / 2;
     }
 
     create() {
@@ -36,7 +36,7 @@ export class Board {
     }
 
     createField(row, col) {
-        const field = new Field(row, col);
+        const field         = new Field(row, col);
 
         this.fields.push(field);
         this.container.addChild(field.sprite);
