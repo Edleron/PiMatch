@@ -59,6 +59,9 @@ export class Game extends Scene {
             this.board.swap(selectedTile, tile);
             // ...
             const matches = this.combinationManager.getMatches();
+            if (matches.length) {
+                this.processMatches(matches);
+            }
             console.log(matches);
             // ...
             this.disabled = false; // lock the board
@@ -67,6 +70,18 @@ export class Game extends Scene {
         // 1. reset fields in moved tiles
         // 2. reset tiles in the board's fields
         // 3. place the moved tiles in the new positions of the new fields
+    }
+
+    processMatches(matches) {
+        this.removeMatches(matches);
+    }
+
+    removeMatches(matches) {
+        matches.forEach(match => {
+            match.forEach(tile => {
+                tile.remove();
+            });
+        });
     }
 
     clearSelection() {
