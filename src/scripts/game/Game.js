@@ -23,10 +23,20 @@ export class Game extends Scene {
         // 2 -> swap tles if there one selected
         // 3 -> select a new tile if 
 
+        if (this.disabled) {
+            return;
+        }
+
         if (!this.selectedTile) {
             this.selectTile(tile);
         } else {
-            this.swap(this.selectedTile, tile);
+
+            if (!this.selectedTile.isNeighbour(tile)) {
+                this.clearSelection();
+                this.selectTile(tile);
+            } else {
+                this.swap(this.selectedTile, tile);
+            }           
         }
     }
 
@@ -44,8 +54,9 @@ export class Game extends Scene {
 
         selectedTile.moveTo(tile.field.position, 0.2);
         tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            this.board.swap(selectedTile, tile);
             // ...
-            this.disabled = true; // unclock the board
+            this.disabled = false; // lock the board
         });
 
         // 1. reset fields in moved tiles

@@ -11,6 +11,10 @@ export class Tile {
         this.sprite.anchor.set(0.5);
     }
 
+    isNeighbour(tile) {
+        return Math.abs(this.field.row - tile.field.row) + Math.abs(this.field.col - tile.field.col) === 1;
+    }
+
     moveTo(position, duration) {
         return new Promise(resolve => {
             gsap.to(this.sprite, {
