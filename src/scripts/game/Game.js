@@ -69,24 +69,29 @@ export class Game extends Scene {
         this.selectedTile.field.select();
     }
 
-    swap(selectedTile, tile) {
+    swap(selectedTile, tile, reverse) {
         this.disabled = true; // lock the board to prevent tiles movement while the animation is already running
         this.clearSelection(); // hide the "field-selected"
 
         selectedTile.moveTo(tile.field.position, 0.2);
         tile.moveTo(selectedTile.field.position, 0.2).then(() => {
             this.board.swap(selectedTile, tile);
-            // ...
-            const matches = this.combinationManager.getMatches();
-            if (matches.length) {
-                this.processMatches(matches);
+            if (!reverse) {
+                // ...
+                const matches = this.combinationManager.getMatches();
+                if (matches.length) {
+                    this.processMatches(matches);
+                } else {
+                    this.swap(tile, selectedTile, true);
+                }
+                // console.log(matches);
+                // ...
+
+                // this.disabled = false; // lock the board
+            } else {
+                this.disabled = false;
             }
-            // console.log(matches);
-            // ...
-
-            // this.disabled = false; // lock the board
         });
-
         // 1. reset fields in moved tiles
         // 2. reset tiles in the board's fields
         // 3. place the moved tiles in the new positions of the new fields
