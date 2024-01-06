@@ -14,6 +14,10 @@ export class Board {
         this.ajustPosition();
     }
 
+    getField(row, col) {
+        return this.fields.find(field => field.row === row && field.col === col);
+    }
+    
     swap(tile1, tile2) {
         const tile1Field        = tile1.field;
         const tile2Field        = tile2.field;

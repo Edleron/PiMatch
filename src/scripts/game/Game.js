@@ -9,6 +9,7 @@ export class Game extends Scene {
         this.selectedTile   = null;
         this.createBackground();
         this.createBoard();
+        this.combinationManager = new CombinationManager(this.board);
     }
 
     createBoard() {
@@ -55,6 +56,9 @@ export class Game extends Scene {
         selectedTile.moveTo(tile.field.position, 0.2);
         tile.moveTo(selectedTile.field.position, 0.2).then(() => {
             this.board.swap(selectedTile, tile);
+            // ...
+            const matches = this.combinationManager.getMatches();
+            console.log(matches);
             // ...
             this.disabled = false; // lock the board
         });
