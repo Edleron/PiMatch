@@ -1,7 +1,7 @@
 import { App } from "../system/App";
 import * as PIXI from "pixi.js";
 import { Field } from "./Field";
-import { Tile } from "./Tile";
+import { TileFactory } from "./TileFactory";
 
 export class Board {
     constructor() {
@@ -30,7 +30,13 @@ export class Board {
     }
 
     createTiles() {
-        const tile = new Tile("green");
+        this.fields.forEach(field => this.createTile(field));
+    }
+
+    createTile(field) {
+        const tile          = TileFactory.generate();
+
+        field.setTile(tile);
         this.container.addChild(tile.sprite);
     }
 

@@ -5,12 +5,21 @@ export class Field {
         this.row        = row;
         this.col        = col;
 
+        this.tile       = null;
+
         this.sprite     = App.sprite("field");
         this.sprite.x   = this.position.x;
         this.sprite.y   = this.position.y;
 
         // Tam Ortaya alma
         this.sprite.anchor.set(0.5);
+    }
+
+    setTile(tile) {
+        this.tile       = tile;
+        tile.field      = this;
+
+        tile.setPosition(this.position);
     }
 
     get position() {
