@@ -2,7 +2,6 @@ import { App } from "../system/App";
 
 export class Tile {
     constructor(color) {
-        this.tile       = null;
         this.field      = null;
         
         this.color      = color;

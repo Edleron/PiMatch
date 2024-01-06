@@ -5,6 +5,7 @@ import { Field } from "./Field";
 
 export class Game extends Scene {
     create() {
+        this.disabled       = false;
         this.selectedTile   = null;
         this.createBackground();
         this.createBoard();
@@ -24,6 +25,8 @@ export class Game extends Scene {
 
         if (!this.selectedTile) {
             this.selectTile(tile);
+        } else {
+            this.swap(this.selectedTile, tile);
         }
     }
 
@@ -33,6 +36,22 @@ export class Game extends Scene {
 
         // -> Highlight
         this.selectedTile.field.select();
+    }
+
+    swap(selectedTile, tile) {
+        this.disabled = true; // lock the board to prevent tiles movement while the animation is already running
+        this.clearSelection(); // hide the "field-selected"
+
+        // 1. reset fields in moved tiles
+        // 2. reset tiles in the board's fields
+        // 3. place the moved tiles in the new positions of the new fields
+    }
+
+    clearSelection() {
+        if (this.selectedTile) {
+            this.selectedTile.field.unselect();
+            this.selectedTile = null
+        }
     }
 
     createBackground() {
