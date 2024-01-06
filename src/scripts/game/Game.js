@@ -42,6 +42,12 @@ export class Game extends Scene {
         this.disabled = true; // lock the board to prevent tiles movement while the animation is already running
         this.clearSelection(); // hide the "field-selected"
 
+        selectedTile.moveTo(tile.field.position, 0.2);
+        tile.moveTo(selectedTile.field.position, 0.2).then(() => {
+            // ...
+            this.disabled = true; // unclock the board
+        });
+
         // 1. reset fields in moved tiles
         // 2. reset tiles in the board's fields
         // 3. place the moved tiles in the new positions of the new fields
