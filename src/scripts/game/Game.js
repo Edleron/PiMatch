@@ -74,7 +74,36 @@ export class Game extends Scene {
 
     processMatches(matches) {
         this.removeMatches(matches);
-        this.processFallDown();
+        this.processFallDown().then(() => {
+            this.addTiles();
+        });
+    }
+
+    addTiles() {
+        return new Promise(resolve => {
+            // 1. fetch all empty fields
+            const fields = this.board.fields.filter(field => field.tile === null);
+            let total = fields.length;
+            let completed = 0;
+
+            // 2. for each empty field
+            fields.forEach(field => {
+                // 3. create a new tile
+                const tile = this.board.createTile(field);
+
+                // 4. place new tile above the board
+                tile.sprite.y = -500;
+
+                const delay = Math.random() * 2 / 10 + 0.3 / (field.row + 1);
+                // 5. move created tile to the corresponding empty field
+                tile.fallDownTo(field.position, delay).then(() => {
+                    ++completed;
+                    if (completed >= total) {
+                        resolve();
+                    }
+                });
+            });
+        });
     }
 
     processFallDown() {

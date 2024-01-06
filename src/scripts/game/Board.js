@@ -58,6 +58,8 @@ export class Board {
         
         field.setTile(tile);
         this.container.addChild(tile.sprite);
+
+        return tile;
     }
 
     createFields() {
