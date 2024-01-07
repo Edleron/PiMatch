@@ -14,7 +14,7 @@ This README is a guide representing Pixi worksheets and sample code. This game i
 * Different Game Match3 Mechanics
   * ...
   * ...
-* 
+* Project finished: 3 hours, 45 minutes :)
 
 ### How do I get set up?
 
