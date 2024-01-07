@@ -33,6 +33,4 @@ This README is a guide representing Pixi worksheets and sample code. This game i
 https://edleron.com
 ```
 
-* Thank you very much for the coding.
-
-*Aleksandr Bolotnikov -> [Click Here](https://www.udemy.com/user/50257ac1-e599-401a-99e4-8a38d8015431/)*
+* Thank you very much for the coding. ->  (: :) -< *Aleksandr*
