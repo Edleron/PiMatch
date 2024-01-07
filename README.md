@@ -9,6 +9,8 @@ This README is a guide representing Pixi worksheets and sample code. This game i
 * Quick summary
 * Days of code
 * Game Prototoype
+* how to use git rebase
+  * https://chat.openai.com/share/d93b254e-c17d-4789-94a9-d115f8d0f56b
 
 ### How do I get set up?
 
