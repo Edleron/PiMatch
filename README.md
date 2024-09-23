@@ -34,7 +34,7 @@ https://edleron.com
 ```
 
 ```
-[https://edleron.com](https://edleron.itch.io/pimatch)
+https://edleron.itch.io/pimatch
 ```
 
 * Thank you very much for the coding. ->  (: :) -< *Aleksandr*
